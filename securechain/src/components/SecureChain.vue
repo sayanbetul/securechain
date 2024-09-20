@@ -8,16 +8,13 @@
     </div>
     <div v-else>
       <h2>Please log in</h2>
-      <form @submit.prevent="login">
-        <input type="text" v-model="username" placeholder="Username" required />
-        <input type="password" v-model="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
+      <button @click="loginWithMetaMask">Login with MetaMask</button>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -26,25 +23,27 @@ export default {
         name: '',
       },
       securityScore: 0,
-      username: '',
-      password: '',
     };
   },
   methods: {
-    login() {
-      // Mock authentication logic
-      if (this.username === 'user' && this.password === 'password') {
-        this.isAuthenticated = true;
-        this.user.name = this.username;
-        this.securityScore = Math.floor(Math.random() * 100); // Simulated score
+    async loginWithMetaMask() {
+      if (window.ethereum) {
+        try {
+          // Kullanıcının cüzdanını bağlayın
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          this.isAuthenticated = true;
+          this.user.name = accounts[0]; // Cüzdan adresini kullanıcı adı olarak alabilirsiniz
+          this.securityScore = Math.floor(Math.random() * 100); // Simüle edilmiş puan
+        } catch (error) {
+          console.error('User denied account access', error);
+        }
       } else {
-        alert('Invalid credentials');
+        alert('Please install MetaMask!');
       }
     },
     logout() {
       this.isAuthenticated = false;
-      this.username = '';
-      this.password = '';
+      this.user.name = '';
       this.securityScore = 0;
     },
   },
@@ -54,9 +53,6 @@ export default {
 <style scoped>
 .secure-chain {
   text-align: center;
-}
-input {
-  margin: 5px;
 }
 button {
   margin-top: 10px;
