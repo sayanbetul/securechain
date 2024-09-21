@@ -19,7 +19,7 @@ async function connectWallet(provider) {
   await provider.request({ method: 'eth_requestAccounts' }).then((accounts) => {
     providerStore.setUserAddress(getAddress(accounts[0]));
   }).catch((e) => {
-    console.log(e.message);
+    console.log('got error: ', e.message);
     providerStore.setUserAddress('');
   });
 

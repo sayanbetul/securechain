@@ -13,7 +13,6 @@ const providerStore = useProviderStore();
 window.addEventListener('eip6963:announceProvider', (event) => {
   const providerDetail = event.detail;
   providerStore.addToProviderList(providerDetail);
-  // console.log(event.detail);
 });
 
 // Requests to all providers in explorer
