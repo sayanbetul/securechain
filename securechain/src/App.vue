@@ -26,8 +26,10 @@ function activateAddressChangeWatcher() {
   provider.on('accountsChanged', (addresses) => {
     if (addresses.length !== 0) {
       providerStore.setUserAddress(getAddress(addresses[0]));
+      providerStore.setWalletConnected(true);
     } else {
       providerStore.setUserAddress('');
+      providerStore.setWalletConnected(false);
     }
   });
 }

@@ -10,12 +10,14 @@ export const useProviderStore = defineStore('providerStore', () => {
   const provider = ref(null);
   const walletClient = ref(null);
   const userAddress = ref('');
+  const walletConnected = ref(false);
 
   //Getters
   const getProviders = computed(() => providerList.value);
   const getProvider = computed(() => provider.value);
   const getWalletClient = computed(() => walletClient.value);
   const getUserAddress = computed(() => userAddress.value);
+  const getWalletConnected = computed(() => walletConnected.value);
 
   //Setters
   function setProviderList(value) {
@@ -40,13 +42,17 @@ export const useProviderStore = defineStore('providerStore', () => {
       transport: custom(provider),
       account: getAddress(userAddress.value),
     });
+  }
 
+  function setWalletConnected(isConnected) {
+    walletConnected.value = isConnected;
   }
 
   function disconnectUser() {
     provider.value = null;
     userAddress.value = '';
     walletClient.value = null;
+    walletConnected.value = false;
   }
 
 
@@ -57,11 +63,13 @@ export const useProviderStore = defineStore('providerStore', () => {
     getProvider,
     getWalletClient,
     getUserAddress,
+    getWalletConnected,
     setProviderList,
     addToProviderList,
     setProvider,
     setWalletClient,
     setUserAddress,
+    setWalletConnected,
     disconnectUser,
   };
 });

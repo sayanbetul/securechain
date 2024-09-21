@@ -6,6 +6,7 @@ const { logout } = useAuth0();
 function _logout() {
   logout({ logoutParams: { returnTo: window.location.origin } });
 }
+
 </script>
 
 <template>

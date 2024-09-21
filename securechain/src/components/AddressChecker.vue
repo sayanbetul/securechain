@@ -28,8 +28,8 @@ const buttons = reactive([
 </script>
 
 <template>
-  <q-card class="bg-white">
-    <q-card-section class="text-h4">
+  <q-card class="bg-white" style="width: calc(100vw/1.5)">
+    <q-card-section class="text-h5">
       Address checker
     </q-card-section>
     <q-card-section>
@@ -38,12 +38,8 @@ const buttons = reactive([
                rounded />
     </q-card-section>
     <q-card-actions align="center">
-      <q-btn-group class="bg-amber-3 full-width" flat push unelevated>
-        <q-btn v-for="(button,key) in buttons" :key="key" :label="button.label" :ripple="false" class="full-width"
-               no-caps
-               push rounded unelevated
-               @click="button.func" />
-      </q-btn-group>
+      <q-btn :ripple="false" class="full-width bg-secondary text-white" flat label="Check address" no-caps push
+             stretch />
     </q-card-actions>
   </q-card>
 </template>
