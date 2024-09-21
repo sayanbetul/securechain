@@ -15,9 +15,6 @@ const providerStore = useProviderStore();
 const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 const $q = useQuasar();
 
-
-const isConnected = computed(() => (isAuthenticated || providerStore.getWalletConnected));
-
 // Get provider then set client
 async function connectWallet(provider) {
   providerStore.setProvider(provider);
@@ -53,11 +50,12 @@ async function connectWallet(provider) {
   }
 }
 
-
+// Log in via Auth0
 function loginAuth0() {
   loginWithRedirect();
 }
 
+// Log out from Auth0
 function _logout() {
   logout({ logoutParams: { returnTo: window.location.origin } });
 }

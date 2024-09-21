@@ -48,7 +48,17 @@ export const useProviderStore = defineStore('providerStore', () => {
     walletConnected.value = isConnected;
   }
 
-  function disconnectUser() {
+  async function disconnectUser() {
+
+    await getProvider.value.request({
+      method: 'wallet_revokePermissions',
+      params: [{ eth_accounts: [getUserAddress.value] }],
+    }).then((val) => {
+      console.log(val);
+    }).catch((e) => {
+      console.log('got error: ', e.message);
+    });
+
     provider.value = null;
     userAddress.value = '';
     walletClient.value = null;
