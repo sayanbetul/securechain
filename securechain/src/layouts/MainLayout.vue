@@ -51,7 +51,7 @@ async function connectWallet(provider) {
 
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-transparent text-black">
+    <q-header class="">
       <q-toolbar>
 
         <q-toolbar-title>
@@ -60,7 +60,7 @@ async function connectWallet(provider) {
 
         <q-btn-dropdown
           :label="providerStore.getUserAddress === '' ? 'Connect wallet' : providerStore.getUserAddress"
-          class="bg-amber-4 text-black"
+          class="bg-secondary"
           color="primary"
           no-caps
           unelevated>
